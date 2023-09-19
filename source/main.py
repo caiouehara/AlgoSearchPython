@@ -9,9 +9,5 @@ bst.insert(40)
 bst.insert(60)
 bst.insert(80)
 
-print("Inorder traversal before deletion:")
-bst.inorder_traversal()
-key_to_delete = 30
-bst.delete(key_to_delete)
-print("Inorder traversal after deletion:")
-bst.inorder_traversal()
+for i in bst.postorder():
+    print(i)
