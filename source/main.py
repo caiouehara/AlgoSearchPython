@@ -1,6 +1,6 @@
-from Arvores import Abb
+from Arvores.Abb import BinarySearchTree
 
-bst = Abb.BinarySearchTree()
+bst = BinarySearchTree()
 bst.insert(50)
 bst.insert(30)
 bst.insert(70)
@@ -9,5 +9,4 @@ bst.insert(40)
 bst.insert(60)
 bst.insert(80)
 
-for i in bst.postorder():
-    print(i)
+bst.printTree()

@@ -1,27 +1,10 @@
-#Autor: Professor Evandro (DCM)
-
-class BSTnoh:
+from Arvores.Tree import Tree
+from Arvores.Tree import Node
+class BSTnoh(Node):
     def __init__(self, key):
-        self.key = key
-        self.esq = None
-        self.dir = None
+        super().__init__(key)
 
-    def getEsq(self):
-        if self.esq != None:
-            return self.esq
-
-    def getDir(self):
-        if self.dir != None:
-            return self.dir
-
-    def getKey(self):
-        return self.key
-        
-class BinarySearchTree:
-    def __init__(self):
-        self.root = None
-        self.items = []
-
+class BinarySearchTree(Tree):
     def insert(self, key):
         self.root = self._insert(self.root, key)
 
@@ -29,9 +12,9 @@ class BinarySearchTree:
         if root is None:
             return BSTnoh(key)
         if key < root.key:
-            root.esq = self._insert(root.esq, key)
+            root.left = self._insert(root.left, key)
         elif key > root.key:
-            root.dir = self._insert(root.dir, key)
+            root.right = self._insert(root.right, key)
         return root
 
     def delete(self, key):
@@ -42,22 +25,22 @@ class BinarySearchTree:
         if root is None:
             return root
         if key < root.key:
-            root.esq = self._delete(root.esq, key)
+            root.left = self._delete(root.left, key)
         elif key > root.key:
-            root.dir = self._delete(root.dir, key)
+            root.right = self._delete(root.right, key)
         else:
-            if root.esq is None:
-                return root.dir
-            elif root.dir is None:
-                return root.esq
-            root.key = self._min_value_node(root.dir).key
-            root.dir = self._delete(root.dir, root.key)
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            root.key = self._min_value_node(root.right).key
+            root.right = self._delete(root.right, root.key)
         return root
 
     def _min_value_node(self, node):
         current = node
-        while current.esq is not None:
-            current = current.esq
+        while current.left is not None:
+            current = current.left
         return current
 
     def inorder_traversal(self):
@@ -66,11 +49,10 @@ class BinarySearchTree:
 
     def _inorder_traversal(self, root):
         if root:
-            self._inorder_traversal(root.esq)
+            self._inorder_traversal(root.left)
             print(root.key, end=" ")
-            self._inorder_traversal(root.dir)
+            self._inorder_traversal(root.right)
     
-
     def inorder(self):
         """ Retorna lista de nos em ordem """
         self.items = []
@@ -81,9 +63,9 @@ class BinarySearchTree:
         if(n == None):
             return
         else:
-            self.__inorder(n.getEsq())
+            self.__inorder(n.getleft())
             self.items.append(n.getKey())
-            self.__inorder(n.getDir())
+            self.__inorder(n.getright())
 
     def preorder(self):
         self.items = []
@@ -95,8 +77,8 @@ class BinarySearchTree:
             return
         else:
             self.items.append(n.getKey())
-            self.__preorder(n.getEsq())
-            self.__preorder(n.getDir())
+            self.__preorder(n.getleft())
+            self.__preorder(n.getright())
 
     def postorder(self):
         self.items = []
@@ -107,6 +89,6 @@ class BinarySearchTree:
         if(n == None):
             return
         else:
-            self.__postorder(n.getEsq())
-            self.__postorder(n.getDir())
+            self.__postorder(n.getleft())
+            self.__postorder(n.getright())
             self.items.append(n.getKey())
