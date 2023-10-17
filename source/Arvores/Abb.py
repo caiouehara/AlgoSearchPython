@@ -1,5 +1,6 @@
 from Arvores.Tree import Tree
-from Arvores.Tree import Node
+from Arvores.Node import SimpleNode as Node
+
 class BSTnoh(Node):
     def __init__(self, key):
         super().__init__(key)
