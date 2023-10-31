@@ -3,24 +3,16 @@ from Arvores.Tree234 import Tree234
 import random
 
 def main():
-    bst = BinarySearchTree()
-    bst.insert(50)
-    bst.insert(30)
-    bst.insert(70)
-    bst.insert(20)
-    bst.insert(40)
-    bst.insert(60)
-    bst.insert(80)
-
-    bst.printTree()
-
     tree = Tree234()
-    numbers=random.sample(range(100), 25)
+    #numbers=random.sample(range(100), 25)
+    numbers= [35, 10, 25, 5, 15,18,20, 30, 50, 40,45, 55, 45, 46, 36, 37 ]
 
     for x in numbers:
         tree.insert(x)
     tree.visualize()
 
-    tree.preorder()
+    tree.remove(45)
 
-main()    
+    tree.visualize()
+
+main()

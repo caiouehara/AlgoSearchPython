@@ -1,6 +1,7 @@
 from Arvores.Node import MultipleNode as Node
 from Arvores.Abb import BinarySearchTree as Abb
 
+#adding equal numbers
 class Tree234(Abb):
     def __init__(self):
         self.root = None
@@ -15,6 +16,13 @@ class Tree234(Abb):
                 self.root = self.root.parent
         return True
     
+    def remove(self, elem):
+        print("Removendo: " + str(elem))
+        if self.root is None:
+            print("Árvore vazia")
+        else:
+            self.root._remove(elem)
+
     def preorder(self):
         print('\n Impressão em pre-oder\n')
         self.root._preorder()
@@ -33,3 +41,4 @@ class Tree234(Abb):
                 for child in n.child:
                     next_level.append(child)
                 this_level = next_level
+        print('\n')

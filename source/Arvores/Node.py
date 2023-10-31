@@ -37,6 +37,46 @@ class MultipleNode():
     Controla o split e a dimensão de um noh já existente.
     """
 
+    #Remove, baseado no algoritmo da árvore B do livro do Cormen 
+    def _remove(self, elem):
+        t = 2
+        for i in range(0, len(self.keys)):
+            #Caso 1 (Folha)
+            if self._isLeaf() and self.keys[i] == elem:
+                print('here')
+                self.keys.remove(elem)
+                break
+
+            for child in self.child:
+                print(str(self.keys) + str(i) + " -> " + str(child.keys))
+                
+                if self.keys[i] == elem:
+
+                    y = self.child[i]
+                    z = self.child[i+1]
+
+                    #Caso 2a
+                    if len(y.keys) >= t:
+                        self.keys[i] = y.keys[2]
+                        y._remove(self.keys[i])
+
+                    #Caso 2b
+                    elif len(y.keys) > t:
+                        if len(z.keys >= t):
+                            self.keys[i] = z[0]
+                            z._remove(self.keys[i]) 
+
+                        #Caso 2c (Fusão)
+                        else:
+                            y.append(self.keys[i])
+                            y.extends(z.keys)
+
+                            self.keys.remove(self.keys[i])
+                            del self.child[1]
+                else:
+                    #Caso 3
+                    child._remove(elem)
+
     def _insertIntoNode(self, new_node):
         for child in new_node.child:
             child.parent = self
@@ -62,6 +102,7 @@ class MultipleNode():
         elif new_node.keys[0] > self.keys[-1]:
             self.child[-1]._insert(new_node)
         else:
+            # Não gera problema de complexidade? Está varrendo todos os elementos da árvore?
             for i in range(0, len(self.keys)):
                 if new_node.keys[0] < self.keys[i]:
                     self.child[i]._insert(new_node)
