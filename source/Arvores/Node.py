@@ -74,7 +74,7 @@ class MultipleNode():
                             y.keys.extend(z.keys)
 
                             del self.keys[i]
-                            del z
+                            del self.child[i+1]
 
                             y._remove(elem)
                             break
