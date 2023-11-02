@@ -11,7 +11,7 @@ def main():
         tree.insert(x)
     tree.visualize()
 
-    tree.remove(45)
+    tree.remove(35)
 
     tree.visualize()
 

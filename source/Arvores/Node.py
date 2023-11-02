@@ -48,7 +48,7 @@ class MultipleNode():
                 break
 
             for child in self.child:
-                print(str(self.keys) + str(i) + " -> " + str(child.keys))
+                print("Trace path: " + str(self.keys) + str(i) + " -> " + str(child.keys))
                 
                 if self.keys[i] == elem:
 
@@ -61,9 +61,9 @@ class MultipleNode():
                         y._remove(self.keys[i])
 
                     #Caso 2b
-                    elif len(y.keys) > t:
-                        if len(z.keys >= t):
-                            self.keys[i] = z[0]
+                    elif len(y.keys) < t:
+                        if len(z.keys) >= t:
+                            self.keys[i] = z.keys[0]
                             z._remove(self.keys[i]) 
 
                         #Caso 2c (Fusão)
