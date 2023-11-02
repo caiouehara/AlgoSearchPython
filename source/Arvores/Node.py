@@ -41,6 +41,9 @@ class MultipleNode():
     def _remove(self, elem):
         t = 2
         for i in range(0, len(self.keys)):
+            if i >= len(self.keys):
+                break
+
             #Caso 1 (Folha)
             if self._isLeaf() and self.keys[i] == elem:
                 self.keys.remove(elem)
@@ -74,10 +77,15 @@ class MultipleNode():
                             del z
 
                             y._remove(elem)
+                            break
                             
                 else:
-                    #Caso 3
                     child._remove(elem)
+                    
+                    
+                    #Caso 3 (ser a raiz)
+                    #if len(self.child) > t - 1:
+
 
     def _insertIntoNode(self, new_node):
         for child in new_node.child:
