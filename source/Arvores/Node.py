@@ -43,7 +43,6 @@ class MultipleNode():
         for i in range(0, len(self.keys)):
             #Caso 1 (Folha)
             if self._isLeaf() and self.keys[i] == elem:
-                print('here')
                 self.keys.remove(elem)
                 break
 
@@ -68,11 +67,14 @@ class MultipleNode():
 
                         #Caso 2c (Fusão)
                         else:
-                            y.append(self.keys[i])
-                            y.extends(z.keys)
+                            z.keys.insert(0, self.keys[i])
+                            y.keys.extend(z.keys)
 
-                            self.keys.remove(self.keys[i])
-                            del self.child[1]
+                            del self.keys[i]
+                            del z
+
+                            y._remove(elem)
+                            
                 else:
                     #Caso 3
                     child._remove(elem)
