@@ -49,42 +49,45 @@ class MultipleNode():
                 self.keys.remove(elem)
                 break
 
-            for child in self.child:
-                print("Trace path: " + str(self.keys) + str(i) + " -> " + str(child.keys))
-                
-                if self.keys[i] == elem:
+            print("Trace path: " + str(self.keys) + str(i) + " -> " )
+            
+            if self.keys[i] == elem:
+                y = self.child[i]
+                z = self.child[i+1]
+                #Caso 2a
+                if len(y.keys) >= t:
+                    self.keys[i] = y.keys[2]
+                    y._remove(self.keys[i])
+                #Caso 2b
+                elif len(y.keys) < t:
+                    if len(z.keys) >= t:
+                        self.keys[i] = z.keys[0]
+                        z._remove(self.keys[i]) 
+                    #Caso 2c (Fusão)
+                    else:
+                        z.keys.insert(0, self.keys[i])
+                        y.keys.extend(z.keys)
+                        del self.keys[i]
+                        del self.child[i+1]
+                        y._remove(elem)
+                        break
 
-                    y = self.child[i]
-                    z = self.child[i+1]
+        #Caso 3                '
+        for j in range(0, len(self.child)):
+            if j+1 > len(self.child[j].keys):
+                break 
+            if len(self.child[j].keys) >= t - 1:
+                #Caso 3a
+                if len(self.child[j-1]) >= t:
+                    self.child[j]._remove(elem)
+                if len(self.child[j-1].keys) and len(self.child[j+1].keys) >= t-1:
+                #Caso 3b   
+                    self.child[j]._remove(elem)
+                    print('here 3b')
+            else:
+                print(str(elem) + " não está na árvore")
 
-                    #Caso 2a
-                    if len(y.keys) >= t:
-                        self.keys[i] = y.keys[2]
-                        y._remove(self.keys[i])
 
-                    #Caso 2b
-                    elif len(y.keys) < t:
-                        if len(z.keys) >= t:
-                            self.keys[i] = z.keys[0]
-                            z._remove(self.keys[i]) 
-
-                        #Caso 2c (Fusão)
-                        else:
-                            z.keys.insert(0, self.keys[i])
-                            y.keys.extend(z.keys)
-
-                            del self.keys[i]
-                            del self.child[i+1]
-
-                            y._remove(elem)
-                            break
-                            
-                else:
-                    child._remove(elem)
-                    
-                    
-                    #Caso 3 (ser a raiz)
-                    #if len(self.child) > t - 1:
 
 
     def _insertIntoNode(self, new_node):
